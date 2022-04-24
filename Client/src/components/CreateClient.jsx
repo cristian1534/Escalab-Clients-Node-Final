@@ -7,7 +7,8 @@ const CreateClient = () => {
   const [email, setEmail] = useState("");
   const [telephone, setTelephone] = useState("");
 
-  const saveClient = async () => {
+  const handleSaveClient = async (e) => {
+    e.preventDefault();
     try {
       let client = {
         id: uniquid(),
@@ -16,58 +17,58 @@ const CreateClient = () => {
         telephone,
       };
 
-      await axios.post("/api/client", client)
-      .then(res => alert(res.data))
-
-    } catch (err) {console.log(err)}
+      await axios.post("/api/client", client).then((res) => {
+        alert(res.data);
+      });
+      setName("");
+      setEmail("");
+      setTelephone("");
+    } catch (err) {
+      console.log(err.message);
+    }
   };
 
   return (
-    <div className="container mt-4">
-      <div className="row">
-        <div className="sm-col-6 offset-3">
-          <h2>Create new Client</h2>
-          <div className="mb-3">
-            <label htmlFor="name" className="form-label">
-              Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="email" className="form-label">
-              Email
-            </label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="telephone" className="form-label">
-              Telephone
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="telephone"
-              value={telephone}
-              onChange={(e) => setTelephone(e.target.value)}
-            />
-          </div>
-          <button className="btn btn-outline-success" onClick={saveClient}>
-            Save
-          </button>
-        </div>
+    <div className="container" >
+      <div className="m-5">
+        <h3>CREATE A NEW CLIENT</h3>
       </div>
+      <form onSubmit={handleSaveClient}>
+        <div className="form-group">
+          <label htmlFor="exampleInputEmail1">Name</label>
+          <input
+            type="text"
+            className="form-control"
+            aria-describedby="emailHelp"
+            placeholder="Enter name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <label htmlFor="exampleInputEmail1">Email</label>
+          <input
+            type="email"
+            className="form-control"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="exampleInputPassword1">Telephone</label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Telephone"
+            onChange={(e) => setTelephone(e.target.value)}
+            value={telephone}
+          />
+        </div>
+        <div className="form-check"></div>
+        <button type="submit" className="btn btn-outline-warning">
+          Save
+        </button>
+      </form>
     </div>
   );
 };

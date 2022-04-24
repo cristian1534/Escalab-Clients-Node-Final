@@ -22,7 +22,7 @@ function App() {
               <Layout>
                 <PrivateRoute path="/home" component={Home} />
                 <Route path="/create-client" component={CreateClient} />
-                <Route path="/edit-client" component={EditClient} />
+                <Route path="/edit-client/:id" component={EditClient} />
               </Layout>
             </Switch>
           </Suspense>

@@ -37,6 +37,11 @@ const Header = () => {
               Home <span className="sr-only">(current)</span>
             </Link>
           </li>
+          <li className="nav-item active">
+            <Link className="nav-link" to="/create-client">
+              Clients <span className="sr-only">(current)</span>
+            </Link>
+          </li>
           <li>{error && <h6>{error}</h6>}</li>
           <li>
             <button
