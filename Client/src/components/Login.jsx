@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import "../assets/css/Register-Login.css";
 
 const Login = () => {
@@ -17,7 +18,14 @@ const Login = () => {
     e.preventDefault();
     try {
       await logIn(email, password);
-      history.push("/home");
+      const auth = getAuth();
+      onAuthStateChanged(auth, (user) => {
+        if (user.email === "admin@escalab.com") {
+          history.push("/admin");
+        } else {
+          history.push("/home");
+        }
+      });
     } catch (err) {
       console.log(err);
       setError("Wrong credentials");

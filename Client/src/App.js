@@ -9,6 +9,7 @@ const Home = lazy(() => import("./containers/Home"));
 const CreateClient = lazy(() => import("./components/CreateClient"));
 const EditClient = lazy(() => import("./components/EditClient"));
 const Layout = lazy(() => import("./containers/Layout"));
+const DisplayCLients = lazy(() => import("./containers/DisplayClients"));
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
               <Route exact path="/" component={Register} />
               <Route path="/login" component={Login} />
               <Layout>
-                <PrivateRoute path="/home" component={Home} />
-                <Route path="/create-client" component={CreateClient} />
-                <Route path="/edit-client/:id" component={EditClient} />
+                <PrivateRoute path="/admin" component={Home} />
+                <PrivateRoute path="/create-client" component={CreateClient} />
+                <PrivateRoute path="/edit-client/:id" component={EditClient} />
+                <PrivateRoute path="/home" component={DisplayCLients} />
               </Layout>
             </Switch>
           </Suspense>
