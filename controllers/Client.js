@@ -32,16 +32,27 @@ exports.getOneClient = async (req, res) => {
   }
 };
 
-exports.updateClient = async(req, res) => {
-  try{
-      await Model.findOneAndUpdate({id: req.params.id}, {
-      name: req.body.name,
-      email: req.body.email,
-      telephone: req.body.telephone
-    })
-    res.status(200).send("Client updated")
-
-  }catch(err){
-    res.status(500).send("Client could not be updated", err)
+exports.updateClient = async (req, res) => {
+  try {
+    await Model.findOneAndUpdate(
+      { id: req.params.id },
+      {
+        name: req.body.name,
+        email: req.body.email,
+        telephone: req.body.telephone,
+      }
+    );
+    res.status(200).send("Client updated");
+  } catch (err) {
+    res.status(500).send("Client could not be updated", err);
   }
-}
+};
+
+exports.deleteClient = async (req, res) => {
+  try {
+    await Model.findOneAndDelete({ id: req.params.id });
+    res.status(200).send("Client deleted");
+  } catch (err) {
+    res.status(500).send("Client could not be deleted", err);
+  }
+};

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 
 const EditClient = () => {
@@ -7,6 +7,7 @@ const EditClient = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [telephone, setTelephone] = useState("");
+  const history = useHistory();
 
   const editClient = async () => {
     try {
@@ -38,6 +39,7 @@ const EditClient = () => {
         .patch("/api/client/update-client/" + id, updateDataClient)
         .then((res) => {
           alert(res.data);
+          history.push("/home")
         });
     } catch (err) {
       console.log(err);
