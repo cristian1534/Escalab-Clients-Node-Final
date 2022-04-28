@@ -9,7 +9,7 @@ exports.createClient = async (req, res) => {
       id: req.body.id,
     });
     newClient.save();
-    res.status(200).send("Client created");
+    res.status(200).send("Client Created");
   } catch (err) {
     res.status(500).send("Client could not be created", err);
   }
@@ -42,7 +42,7 @@ exports.updateClient = async (req, res) => {
         telephone: req.body.telephone,
       }
     );
-    res.status(200).send("Client updated");
+    res.status(200).send("Client Modified");
   } catch (err) {
     res.status(500).send("Client could not be updated", err);
   }
@@ -51,7 +51,7 @@ exports.updateClient = async (req, res) => {
 exports.deleteClient = async (req, res) => {
   try {
     await Model.findOneAndDelete({ id: req.params.id });
-    res.status(200).send("Client deleted");
+    res.status(200).send("Client Deleted");
   } catch (err) {
     res.status(500).send("Client could not be deleted", err);
   }

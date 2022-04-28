@@ -18,11 +18,11 @@ const Register = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     try{
-      await signUp(email, password)
+     await signUp(email, password)
       history.push("/login")
     }catch(err) {
       console.log(err);
-      setError("Server Error")
+      setError("server error")
       setTimeout(() => setError(""), 1500);
     }
 
@@ -40,7 +40,7 @@ const Register = () => {
           width="100px"
           alt="Logo"
         />
-        {error && <h3>{error}</h3>}
+        {error && <h3 style={{color:"red"}}>{error}</h3>}
         <h3>Sign Up</h3>
         <form onSubmit={handleSubmit}>
           <div className="inputBox">
@@ -51,6 +51,7 @@ const Register = () => {
               name="Username"
               placeholder="Username"
               onChange={handleUsername}
+              required
             />{" "}
             <input
               id="email"
@@ -58,6 +59,7 @@ const Register = () => {
               name="email"
               placeholder="Email"
               onChange={handleEmail}
+              required
             />{" "}
             <input
               id="pass"
@@ -65,6 +67,7 @@ const Register = () => {
               name="Password"
               placeholder="Password (min 6 digits)"
               onChange={handlePassword}
+              required
             />{" "}
           </div>{" "}
           <input type="submit" name="" value="Register" />

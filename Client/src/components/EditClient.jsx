@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const EditClient = () => {
   const { id } = useParams();
@@ -32,17 +33,21 @@ const EditClient = () => {
         name: name,
         email,
         telephone,
-        id
+        id,
       };
 
       await axios
         .patch("/api/client/update-client/" + id, updateDataClient)
         .then((res) => {
-          alert(res.data);
-          history.push("/home")
+          new Swal({
+            title: `${res.data}`,
+            text: "Operation Successfully",
+            icon: "success",
+          });
+          history.push("/admin");
         });
     } catch (err) {
-      console.log(err);
+      alert(err.message);
     }
   };
 

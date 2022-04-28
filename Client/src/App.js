@@ -5,11 +5,11 @@ import "./App.css";
 
 const Register = lazy(() => import("./components/Register"));
 const Login = lazy(() => import("./components/Login"));
-const Home = lazy(() => import("./containers/Home"));
+const Admin = lazy(() => import("./containers/Admin"));
 const CreateClient = lazy(() => import("./components/CreateClient"));
 const EditClient = lazy(() => import("./components/EditClient"));
 const Layout = lazy(() => import("./containers/Layout"));
-const DisplayCLients = lazy(() => import("./containers/DisplayClients"));
+const Home = lazy(() => import("./containers/Home"));
 
 function App() {
   return (
@@ -21,10 +21,10 @@ function App() {
               <Route exact path="/" component={Register} />
               <Route path="/login" component={Login} />
               <Layout>
-                <PrivateRoute path="/admin" component={Home} />
+                <PrivateRoute path="/admin" component={Admin} />
                 <PrivateRoute path="/create-client" component={CreateClient} />
                 <PrivateRoute path="/edit-client/:id" component={EditClient} />
-                <PrivateRoute path="/home" component={DisplayCLients} />
+                <PrivateRoute path="/home" component={Home} />
               </Layout>
             </Switch>
           </Suspense>

@@ -1,37 +1,53 @@
 import React, { useState } from "react";
-import uniquid from "uniquid";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
+import uniqid from "uniqid";
+import Swal from "sweetalert2";
 
 const CreateClient = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [telephone, setTelephone] = useState("");
+  const history = useHistory();
+  const [errors, setErrors] = useState([]);
 
   const handleSaveClient = async (e) => {
     e.preventDefault();
     try {
       let client = {
-        id: uniquid(),
+        id: uniqid(),
         name,
         email,
         telephone,
       };
 
       await axios.post("/api/client", client).then((res) => {
-        alert(res.data);
+        new Swal({
+          title: `${res.data}`,
+          text: "Operation Successfully",
+          icon: "success",
+        });
+        history.push("/admin");
       });
       setName("");
       setEmail("");
       setTelephone("");
     } catch (err) {
-      console.log(err.message);
+      setErrors(err.response.data.errors);
+      setTimeout(() => setErrors([]), 1000);
     }
   };
 
   return (
-    <div className="container" >
+    <div className="container">
       <div className="m-5">
         <h3>CREATE A NEW CLIENT</h3>
+        {errors &&
+          errors.map((err) => (
+            <div class="alert alert-danger" role="alert" key={err.index}>
+              {err.msg}
+            </div>
+          ))}
       </div>
       <form onSubmit={handleSaveClient}>
         <div className="form-group">
@@ -65,7 +81,7 @@ const CreateClient = () => {
           />
         </div>
         <div className="form-check"></div>
-        <button type="submit" className="btn btn-outline-warning">
+        <button type="submit" className="btn btn-outline-success container">
           Save
         </button>
       </form>

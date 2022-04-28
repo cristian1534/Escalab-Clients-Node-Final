@@ -7,8 +7,9 @@ const {
   updateClient,
   deleteClient,
 } = require("../controllers/Client");
+const {validateClient} = require("../middleware/validateClient");
 
-router.post("/client", createClient);
+router.post("/client", validateClient, createClient);
 router.get("/client/get-all-clients", getClients);
 router.get("/client/edit-client/:id", getOneClient);
 router.patch("/client/update-client/:id", updateClient);

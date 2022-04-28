@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Swal from "sweetalert2";
 import "../assets/css/Register-Login.css";
 
 const Login = () => {
@@ -21,6 +22,11 @@ const Login = () => {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
         if (user.email === "admin@escalab.com") {
+          new Swal({
+            title: "Bienvenido Administrador",
+            text: `Backoffice Escalab's Clients`,
+            icon: "success",
+          });
           history.push("/admin");
         } else {
           history.push("/home");
@@ -28,7 +34,7 @@ const Login = () => {
       });
     } catch (err) {
       console.log(err);
-      setError("Wrong credentials");
+      setError("wrong credentials");
       setTimeout(() => setError(""), 1500);
     }
   };
@@ -44,7 +50,7 @@ const Login = () => {
           width="100px"
           alt="Logo"
         />
-        {error && <h2>{error}</h2>}
+        {error && <h2 style={{color:"red"}}>{error}</h2>}
         <h3>Login</h3>
         <form onSubmit={handleSubmit}>
           <div className="inputBox">
@@ -55,6 +61,7 @@ const Login = () => {
               name="email"
               placeholder="Email"
               onChange={handleEmail}
+              required
             />{" "}
             <input
               id="pass"
@@ -62,6 +69,7 @@ const Login = () => {
               name="Password"
               placeholder="Password"
               onChange={handlePassword}
+              required
             />{" "}
           </div>{" "}
           <input type="submit" name="" value="Login" />

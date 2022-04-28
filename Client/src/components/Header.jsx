@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
@@ -32,16 +32,25 @@ const Header = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item active">
-            <Link className="nav-link" to="/admin">
-              Home <span className="sr-only">(current)</span>
-            </Link>
-          </li>
-          <li className="nav-item active">
-            <Link className="nav-link" to="/create-client">
-              Clients <span className="sr-only">(current)</span>
-            </Link>
-          </li>
+          {currentUser && currentUser.email === "admin@escalab.com" && (
+            <Fragment>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/home">
+                  Home <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/create-client">
+                  Clients <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+              <li className="nav-item active">
+                <Link className="nav-link" to="/admin">
+                  Admin <span className="sr-only">(current)</span>
+                </Link>
+              </li>
+            </Fragment>
+          )}
           <li>{error && <h6>{error}</h6>}</li>
           <li>
             <button

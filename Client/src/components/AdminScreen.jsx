@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
+import Swal from "sweetalert2";
 
-const Clients = () => {
+const ClientsAdminScreen = () => {
   const [clients, setClients] = useState([]);
+  const history = useHistory();
 
   const getAllClients = async () => {
     try {
@@ -11,7 +13,7 @@ const Clients = () => {
         setClients(res.data);
       });
     } catch (err) {
-      console.log(err);
+      alert(err.message);
     }
   };
 
@@ -22,11 +24,17 @@ const Clients = () => {
   const handleDeleteClient = async (id) => {
     try {
       await axios.delete("/api/client/delete-client/" + id).then((res) => {
-        alert(res.data);
-        window.location.reload();
+        new Swal({
+          title: `${res.data}`,
+          text: "Operation Successfully",
+          icon: "success",
+        });
+        setTimeout(() => {
+          window.location.reload()
+        }, 1500);
       });
     } catch (err) {
-      console.log(err);
+     console.log(err);
     }
   };
 
@@ -51,7 +59,7 @@ const Clients = () => {
               <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
             </svg>
             <br />
-            Empty data
+            Searching...
             <br />
           </div>
         </div>
@@ -69,7 +77,7 @@ const Clients = () => {
             </thead>
             <tbody>
               {clients.map((client) => (
-                <tr>
+                <tr key={client.id}>
                   <td>{client.name}</td>
                   <td>{client.email}</td>
                   <td>{client.telephone}</td>
@@ -116,4 +124,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+export default ClientsAdminScreen;

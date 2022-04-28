@@ -1,10 +1,10 @@
 import React from "react";
-import GetAllClients from "../components/GetAllClients";
+import HomeScreen from "../components/HomeScreen";
 
 const Home = () => {
   return (
     <div>
-      <GetAllClients />
+      <HomeScreen />
     </div>
   );
 };

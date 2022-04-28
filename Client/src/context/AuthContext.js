@@ -6,6 +6,7 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = (props) => {
   const [currentUser, setCurrentUser] = useState({});
+  
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -13,8 +14,8 @@ export const AuthProvider = (props) => {
     });
   }, []);
 
-  const signUp = (email, password) => {
-    return auth.createUserWithEmailAndPassword(email, password);
+  const signUp = (email, password, displayName) => {
+    return auth.createUserWithEmailAndPassword(email, password, displayName);
   };
 
   const logIn = (email, password) => {
