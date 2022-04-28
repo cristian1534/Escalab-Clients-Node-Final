@@ -2,7 +2,7 @@
     "definition": {
         "openapi":"3.0.0",
         "info": {
-            "title": "Escalab's clients backoffice.",
+            "title": "Escalab's Clients Backoffice.",
             "version": "1.0.0",
             "description": "Backoffice with Node, express, Mongo, Firebase and React",
             "contact": {

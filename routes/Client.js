@@ -23,13 +23,13 @@ const {validateClient} = require("../middleware/validateClient");
  *             $ref: "#/components/schemas/Client"
  *     responses:
  *       200: 
- *         description: ok
+ *         description: Client Created
  *         content:
  *           application/json:
  *             schema:
  *               $ref: "#/components/schemas/Client"
- *       400:
- *         description: bad request     
+ *       500:
+ *         description: Client could not be created     
  */
 router.post("/client", validateClient, createClient);
 
@@ -53,7 +53,52 @@ router.post("/client", validateClient, createClient);
 router.get("/client/get-all-clients", getClients);
 router.get("/client/edit-client/:id", getOneClient);
 router.patch("/client/update-client/:id", updateClient);
+
+
+/**
+ * @swagger
+ * /category:
+ *   delete:
+ *     summary: Delete Client
+ *     tags: [Client]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: "#/components/schemas/Client"
+ *     responses:
+ *       200: 
+ *         description: Client Deleted
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: "#/components/schemas/Client"
+ *       500:
+ *         description: Client could not be deleted     
+ */
 router.delete("/client/delete-client/:id", deleteClient);
+
+/**
+ * @swagger
+ * components:
+ *  schemas:
+ *    Client:
+ *      type: object
+ *      required:
+ *        - name
+ *      properties:
+ *        name:
+ *          type: String,
+ *        email: 
+ *          type: String,
+ *        telephone:
+ *          type: String
+ *          
+ */
+
+
+
 
 module.exports = router;
 
