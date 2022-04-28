@@ -1,0 +1,36 @@
+{
+    "definition": {
+        "openapi":"3.0.0",
+        "info": {
+            "title": "Escalab's clients backoffice.",
+            "version": "1.0.0",
+            "description": "Backoffice with Node, express, Mongo, Firebase and React",
+            "contact": {
+                "name": "API Support",
+                "url": "https://api-final-node-cristian.com",
+                "email": "finalnode@gmail.com"
+            },
+            "Servers": [
+                {
+                    "url":"http://localhost:5000/api",
+                    "description": "My API Documentation"
+                },
+                {
+                    "url":"https://aws.final-node.com",
+                    "description": "My API Documentation in Production"
+                }
+            ],
+            "security": [{"ApiKey": []}],
+            "components": {
+                "securitySchemas": {
+                    "ApiKey": {
+                        "type": "apikey",
+                        "in":"header",
+                        "name": "authtoken"
+                    }
+                }
+            }
+        }
+    },
+    "apis": ["./routes/*.js"]
+}
