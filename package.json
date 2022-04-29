@@ -14,12 +14,12 @@
   "scripts": {
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix Client",
-    "dev": "concurrently \"npm run client\" \"npm run server\""
+    "Client": "npm start --prefix Client",
+    "dev": "concurrently \"npm run Client\" \"npm run server\""
   },
-  "name": "escalab-clients-backoffice",
+  "name": "Escalab-Clients-Backoffice",
   "version": "1.0.0",
-  "description": "Backend for Escalab's clients.",
+  "description": "Backend for Escalab's Clients.",
   "main": "server.js",
   "author": "Cristian Machuca",
   "license": "MIT"

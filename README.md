@@ -16,7 +16,6 @@ API testeada con Postman.
 
 Documentación del proyecto con SWAGGER en "http://localhost:5000/api/docs/".
 
-Deploy de Backend en Heroku:
 
 
 Cristian Machuca
